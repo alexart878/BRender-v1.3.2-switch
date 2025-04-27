@@ -198,7 +198,12 @@ br_filesystem * BR_PUBLIC_ENTRY BrFilesystemSet(br_filesystem *newfs)
 {
 	br_filesystem *old = fw.fsys;
 
+// new fs can't load some files when runnig on nx hardware
+#ifndef __SWITCH__
 	if(newfs == NULL)
+#else
+	if(newfs != NULL)
+#endif
 		fw.fsys = _BrDefaultFilesystem;
 	else
 		fw.fsys = newfs;

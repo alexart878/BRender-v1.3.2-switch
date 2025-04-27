@@ -45,4 +45,9 @@ target_sources(host INTERFACE
         )
 
 target_include_directories(host PRIVATE .)
-target_link_libraries(host PRIVATE brender-inc-ddi ${CMAKE_DL_LIBS})
+
+if (NOT NINTENDO_SWITCH)
+        target_link_libraries(host PRIVATE brender-inc-ddi ${CMAKE_DL_LIBS})
+else ()
+        target_link_libraries(host PRIVATE brender-inc-ddi)
+endif ()
